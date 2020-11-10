@@ -1,6 +1,5 @@
 import React from 'react';
 import './ColorPicker.scss';
-import ClassNames from 'classnames';
 
 export class ColorPicker extends React.PureComponent {
   state = {
@@ -27,12 +26,13 @@ export class ColorPicker extends React.PureComponent {
           {selectedColor.name || 'Цвет'}
         </button>
         {this.state.isOpen && (
-          <ul className="color-picker__list">
+          <ul 
+            className="color-picker__list" 
+            onMouseLeave={this.toggle}
+          >
             {colors.map(color => (
               <li
-                className={ClassNames('color-picker__list-item', {
-                  'color-picker__list-item--selected': selectedColor.value === color.value,
-                })}
+                className="color-picker__list-item"
                 key={color.id}
                 onClick={() => {
                   selectColor(color);

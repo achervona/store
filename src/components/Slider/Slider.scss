@@ -1,0 +1,34 @@
+.slider {
+  &__img-block {
+    position: relative;
+    width: 256px;
+    height: 261px;
+    margin-bottom: 25px;
+
+    border-radius: 25px;
+    object-fit: cover;
+    overflow: hidden;
+    background-color: white;
+
+    &:hover .slider__img--secondary {
+      opacity: 1;
+    }
+  }
+
+  &__img {
+    width: 256px;
+    height: 261px;
+    border-radius: 25px;
+
+    &--secondary {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+
+      opacity: 0;
+      transition: opacity 0.4s;
+    }
+  }
+}

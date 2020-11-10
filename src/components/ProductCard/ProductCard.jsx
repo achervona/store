@@ -3,8 +3,9 @@ import './ProductCard.scss';
 import ClassNames from 'classnames';
 
 import { ColorPicker } from '../ColorPicker';
-
-const IMG_URL = '/images/';
+import { Slider } from '../Slider';
+import { RadioBlock } from '../RadioBlock';
+import { Increaser } from '../Increaser';
 
 export class ProductCard extends React.PureComponent {
   state = {
@@ -59,18 +60,8 @@ export class ProductCard extends React.PureComponent {
       <div className="product-card product-list__card">
         <div className="product-card__top">
           <div className="product-card__new-mark">new</div>
-          <div className="product-card__img-block">
-            {images.map((img, index) => (
-              <img 
-                src={`${IMG_URL}${img}`}
-                alt="Product"
-                className={ClassNames('product-card__img', {
-                  'product-card__img--secondary': index > 0,
-                })}
-                key={img}
-              />
-            ))}
-          </div>
+
+          <Slider images={images} />
 
           <div 
             className={ClassNames('product-card__icon', {
@@ -94,52 +85,20 @@ export class ProductCard extends React.PureComponent {
 
           <p className="product-card__price">{`${price} грн`}</p>
         </div>
-      
-        <div className="product-card__radio-block">
-          {volumes.map(value => (
-            <div className="product-card__radio-item" key={value}>
-              <input 
-                id={`${id}${value}`} 
-                type="radio"
-                name={`radio${id}`} 
-                value={value}
-                className="product-card__radio"
-                onChange={() => this.selectVolume(value)}
-                checked={volume === value}
-              />
-              <label 
-                htmlFor={`${id}${value}`} 
-                className="product-card__radio-label"
-              >
-                <div><div></div></div>
-                {`${value} мл`}
-              </label>
-            </div>
-          ))}
-        </div> 
+
+        <RadioBlock
+          items={volumes}
+          selectedValue={volume}
+          selectValue={this.selectVolume}
+          productId={id}
+        />
 
         <div className="product-card__buttons">
-          <div className="product-card__quantity-change">
-            <button
-              type="button"
-              name="decrease"
-              className="product-card__quantity-change-item product-card__quantity-change-item--left"
-              onClick={this.decreaseQuantity}
-            >
-              -
-            </button>
-            <div className="product-card__quantity-change-item">
-              {quantity}
-            </div>
-            <button
-              type="button"
-              name="increase"
-              className="product-card__quantity-change-item product-card__quantity-change-item--right"
-              onClick={this.increaseQuantity}
-            >
-              +
-            </button>
-          </div>
+          <Increaser
+            quantity={quantity}
+            increaseQuantity={this.increaseQuantity}
+            decreaseQuantity={this.decreaseQuantity}
+          />
 
           <button
             type="button"
