@@ -1,0 +1,45 @@
+.color-picker {
+  &__button {
+    position: relative;
+    width: 258px;
+    height: 30px;
+    padding: 0 20px;
+  
+    background-color: white;
+    border-radius: 30px;
+    text-align: left;
+  
+    &::after {
+      content: "";
+      display: inline-block;
+      position: absolute;
+      top: 10px;
+      right: 20px;
+      width: 10px;
+      height: 10px;
+      background: url("../../icons/select-arrow.svg") no-repeat center;
+    }
+  }
+
+  &__list {
+    position: absolute;
+    width: 258px;
+
+    background-color: white;
+    border-radius: 10px;
+    font-size: 14px;
+    z-index: 2;
+
+    cursor: pointer;
+  }
+
+  &__list-item {
+    width: 100%;
+    padding: 5px 20px;
+    border-radius: 10px;
+
+    &--selected {
+      background-color:#dedede;
+    }
+  }
+}

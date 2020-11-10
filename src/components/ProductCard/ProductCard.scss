@@ -1,3 +1,8 @@
+$card-bg-color: #f8fafc;
+$button-color: #ad8621;
+$button-bg-primary: linear-gradient(261.65deg, #efbb37 -3.95%, #cf9e1f 109.44%);
+$button-bg-secondary: linear-gradient(261.65deg, #f5c03b -3.95%, $button-color 109.44%);
+
 .product-card {
   display: flex;
   flex-direction: column;
@@ -5,7 +10,7 @@
   width: 573px;
   padding: 46px;
 
-  background-color:#f8fafc;
+  background-color: $card-bg-color;
   border-radius: 25px;
   box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.1);
 
@@ -28,7 +33,7 @@
     width: 70px;
     height: 26px;
 
-    background: linear-gradient(261.65deg, #EFBB37 -3.95%, #CF9E1F 109.44%);
+    background: $button-bg-primary;
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 30px;
 
@@ -44,7 +49,13 @@
 
     box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
     border-radius: 50%;
-    background: url("../../api/images/icon.svg") white no-repeat center;
+    background: url("../../icons/icon.svg") white no-repeat center;
+
+    cursor: pointer;
+
+    &--clicked {
+      background: url("../../icons/checkmark.svg") white no-repeat center;
+    }
   }
 
   &__title {
@@ -59,12 +70,21 @@
   }
 
   &__img-block {
+    position: relative;
     width: 256px;
     height: 261px;
+    margin-bottom: 25px;
+
     border-radius: 25px;
     object-fit: cover;
     overflow: hidden;
-    margin-bottom: 25px;
+    background-color: white;
+
+    transition: opacity 0.5s;
+
+    &:hover .product-card__img--secondary {
+      opacity: 1;
+    }
   }
 
   &__img {
@@ -72,53 +92,22 @@
     height: 261px;
     border-radius: 25px;
 
-    transition: transform 0.3s ease-in-out;
-
-    &:hover {
-      transform: scale(1.8) rotate(-20deg);
+    &--secondary {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      opacity: 0;
+      transition: opacity 0.3s;
     }
   }
 
   &__select-block {
-    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-  }
-
-  &__select-wrapper {
-    background-color: #fff;
-    position: relative;
-    width: 258px;
-    height: 30px;
-    border-radius: 30px;
-    margin-bottom: 18px;
-
-    &::after {
-      content: "";
-      display: inline-block;
-      position: absolute;
-      top: 10px;
-      right: 20px;
-      width: 10px;
-      height: 10px;
-      background: url("../../api/images/select-arrow.svg") no-repeat center;
-    }
-  }
-
-  &__select {
-    width: 258px;
-    height: 30px;
-    padding: 0 20px;
-
-    background: transparent;
-
-    font-family: "SF UI Display", sans-serif;
-    font-size: 12px;
-    font-weight: 300;
-    border-radius: 30px;
-    border: none;
-    appearance: none;
+    width: 100%;
   }
 
   &__price {
@@ -129,12 +118,13 @@
   &__radio-block {
     width: 100%;
     margin-bottom: 27px;
+    margin-top: 18px;
   }
 
   &__radio {
     display: none;
 
-    &:checked + label span div {
+    &:checked + label div div {
       display: block;
     }
   }
@@ -146,7 +136,7 @@
 
     font-weight: 500;
 
-    & > span {
+    & > div {
       display: inline-block;
       position: relative;
       width: 25px;
@@ -164,7 +154,8 @@
         transform: translate(-50%, -50%);
         width: 17px;
         height: 17px;
-        background: linear-gradient(261.65deg, #EFBB37 -3.95%, #CF9E1F 109.44%);
+
+        background: $button-bg-primary;
         border-radius: 5px;
       }
     }
@@ -183,21 +174,21 @@
   }
 
   &__quantity-change-item {
+    width: 33%;
+
     background-color: #e2e9f0;
     font-size: 20px;
-
     line-height: 1.8;
     text-align: center;
-    width: 30%;
 
     &--left {
-      border-radius: 30px 0 0 30px;
       padding-left: 15px;
+      border-radius: 30px 0 0 30px;
     }
 
     &--right {
-      border-radius: 0 30px 30px 0;
       padding-right: 15px;
+      border-radius: 0 30px 30px 0;
     }
   }
 
@@ -205,21 +196,23 @@
     width: 302px;
     height: 39px;
 
-    //background-image: linear-gradient(261.65deg, #EFBB37 -3.95%, #CF9E1F 109.44%);
-    background-image: linear-gradient(261.65deg, #f5c03b -3.95%, #ad8621 109.44%);
+    background: $button-bg-secondary;
     border-radius: 30px;
+  
     font-size: 18px;
     text-transform: uppercase;
     color: white;
-    opacity: 0.9;
 
+    opacity: 0.9;
     transition: opacity 0.3s, box-shadow 0.3s;
-    cursor: pointer;
 
     &:hover {
-      //background-image: linear-gradient(261.65deg, #EFBB37 -3.95%, #b98e1f 109.44%);
       opacity: 1;
-      box-shadow: 0px 0px 10px #ad8621;
+      box-shadow: 0px 0px 10px $button-color;
+    }
+
+    &--pressed {
+      opacity: 0.7;
     }
   }
 }

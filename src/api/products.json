@@ -3,7 +3,7 @@
     "id": 1,
     "title": "Шампунь",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    "img": "image1.jpg",
+    "images": ["image1.jpg", "image2.jpg"],
     "price": 200,
     "volumes": [100, 200, 300],
     "colors": [
@@ -33,7 +33,7 @@
     "id": 2,
     "title": "Шампунь",
     "description": "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco.",
-    "img": "",
+    "images": ["image3.jpg"],
     "price": 200,
     "volumes": [100, 200, 300],
     "colors": [

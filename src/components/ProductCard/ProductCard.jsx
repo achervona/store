@@ -1,12 +1,18 @@
 import React from 'react';
 import './ProductCard.scss';
-import img from '../../api/images/image1.jpg';
+import ClassNames from 'classnames';
+
+import { ColorPicker } from '../ColorPicker';
+
+const IMG_URL = '/images/';
 
 export class ProductCard extends React.PureComponent {
   state = {
     quantity: 1,
     volume: this.props.volumes[0],
     color: '',
+    isButtonPressed: false,
+    isIconClicked: false,
   };
 
   increaseQuantity = () => {
@@ -31,52 +37,61 @@ export class ProductCard extends React.PureComponent {
     });
   };
 
-  selectColor = ({ target }) => {
+  selectColor = (color) => {
     this.setState({
-      color: target.value,
+      color,
     });
   };
 
   render() {
-    const { id, title, description, price, volumes, colors } = this.props;
-    const { quantity, volume } = this.state;
-    //delete not forget
-    console.log(this.state);
+    const { 
+      id, 
+      title, 
+      description, 
+      images, 
+      price, 
+      volumes, 
+      colors 
+    } = this.props;
+    const { quantity, volume, color } = this.state;
 
     return (
       <div className="product-card product-list__card">
         <div className="product-card__top">
           <div className="product-card__new-mark">new</div>
           <div className="product-card__img-block">
-            <img 
-              src={img}
-              alt="Product"
-              className="product-card__img"
-            />
+            {images.map((img, index) => (
+              <img 
+                src={`${IMG_URL}${img}`}
+                alt="Product"
+                className={ClassNames('product-card__img', {
+                  'product-card__img--secondary': index > 0,
+                })}
+                key={img}
+              />
+            ))}
           </div>
-          <div className="product-card__icon"></div>
+
+          <div 
+            className={ClassNames('product-card__icon', {
+              'product-card__icon--clicked': this.state.isIconClicked
+            })}
+            onClick={() => this.setState(prevState => ({
+              isIconClicked: !prevState.isIconClicked
+            }))}
+          >
+          </div>
         </div>
-        
         <div className="product-card__title">{title}</div>
         <p className="product-card__description">{description}</p>
         
         <div className="product-card__select-block">
-          <div className="product-card__select-wrapper">
-            <select 
-              className="product-card__select"
-              onChange={this.selectColor}
-            >
-              <option value="">Цвет</option>
-              {colors.map(color => (
-                <option 
-                  value={color.value}
-                  key={color.id}
-                >
-                  {color.name}
-                </option>
-              ))}
-            </select>
-          </div>
+          <ColorPicker
+            selectedColor={color}
+            colors={colors}
+            selectColor={this.selectColor}
+          />
+
           <p className="product-card__price">{`${price} грн`}</p>
         </div>
       
@@ -92,8 +107,11 @@ export class ProductCard extends React.PureComponent {
                 onChange={() => this.selectVolume(value)}
                 checked={volume === value}
               />
-              <label htmlFor={`${id}${value}`} className="product-card__radio-label">
-                <span><div></div></span>
+              <label 
+                htmlFor={`${id}${value}`} 
+                className="product-card__radio-label"
+              >
+                <div><div></div></div>
                 {`${value} мл`}
               </label>
             </div>
@@ -125,7 +143,12 @@ export class ProductCard extends React.PureComponent {
 
           <button
             type="button"
-            className="product-card__button"
+            className={ClassNames('product-card__button',
+              { 'product-card__button--pressed': this.state.isButtonPressed }
+            )}
+            onClick={() => this.setState(prevState => ({
+              isButtonPressed: !prevState.isButtonPressed
+            }))}
           >
             Купить
           </button>
@@ -133,5 +156,4 @@ export class ProductCard extends React.PureComponent {
       </div>
     );
   }
- 
 }

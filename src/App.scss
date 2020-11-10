@@ -11,10 +11,20 @@ html {
 }
 
 body,
-p {
+p,
+li,
+ul {
   margin: 0;
+  padding: 0;
 }
 
 button {
+  font-family: "SF UI Display", sans-serif;
   border: none;
+  outline: none;
+  cursor: pointer;
+}
+
+li {
+  list-style: none;
 }
