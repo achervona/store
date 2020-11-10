@@ -1,0 +1,9 @@
+.product-list {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 40px;
+
+  &__card {
+    margin: 10px;
+  }
+}

@@ -1,0 +1,20 @@
+*,
+*::after,
+*::before {
+  box-sizing: border-box;
+}
+
+html {
+  font-family: "SF UI Display", sans-serif;
+  font-size: 16px;
+  line-height: 24px;
+}
+
+body,
+p {
+  margin: 0;
+}
+
+button {
+  border: none;
+}
